@@ -1,0 +1,2 @@
+# StaticCollectionView
+StaticCollectionView with Swift
