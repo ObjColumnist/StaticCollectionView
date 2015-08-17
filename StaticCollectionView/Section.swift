@@ -90,8 +90,7 @@ public class Section: Node {
     public func containsObject(object: AnyObject) -> Bool {
         if let index = indexForObject(object) {
             return true
-        }
-        else {
+        } else {
             return false
         }
     }
