@@ -21,7 +21,7 @@ public class Section: Node {
     
     public var numberOfItems: Int {
         get {
-           return count(items)
+           return items.count
         }
     }
     
@@ -65,11 +65,11 @@ public class Section: Node {
     }
     
     public func indexForItem(item: Item) -> Int? {
-        return find(items, item)
+        return items.indexOf(item)
     }
     
     public func indexForObject(object: AnyObject) -> Int? {
-        for (index, item) in enumerate(items) {
+        for (index, _) in items.enumerate() {
             if let object = object as? NSObject {
                 for item in items{
                     if let itemObject = item.object as? NSObject {
@@ -84,11 +84,11 @@ public class Section: Node {
     }
     
     public func containsItem(item: Item) -> Bool {
-        return contains(items, item)
+        return items.contains(item)
     }
     
     public func containsObject(object: AnyObject) -> Bool {
-        if let index = indexForObject(object) {
+        if let _ = indexForObject(object) {
             return true
         } else {
             return false

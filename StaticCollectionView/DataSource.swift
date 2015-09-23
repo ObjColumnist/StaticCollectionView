@@ -14,7 +14,7 @@ public class DataSource {
     
     public var numberOfSections: Int {
         get {
-            return count(sections)
+            return sections.count
         }
     }
     
@@ -28,7 +28,7 @@ public class DataSource {
         get {
             var selectedItems: [Item] = []
             
-            if let selectedIndexPaths = collectionView?.indexPathsForSelectedItems() as? [NSIndexPath] {
+            if let selectedIndexPaths = collectionView?.indexPathsForSelectedItems() {
                 for indexPath in selectedIndexPaths{
                     selectedItems.append(itemAtIndexPath(indexPath))
                 }

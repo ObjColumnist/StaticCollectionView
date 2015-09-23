@@ -33,15 +33,9 @@ public class ViewController: UICollectionViewController {
     }
 
     public override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell: UICollectionViewCell!
-        
         let item = dataSource.itemAtIndexPath(indexPath)
         
-        if let dequeueCellHandler = item.dequeueCellHandler {
-            return dequeueCellHandler(item, collectionView, indexPath)
-        }
-        
-        return cell
+        return item.dequeueCellHandler!(item, collectionView, indexPath)
     }
 
     // MARK: UICollectionViewDelegate
