@@ -8,15 +8,15 @@
 
 import UIKit
 
-public class Item: Node {
-    public var size: CGSize?
+open class Item: Node {
+    open var size: CGSize?
     
-    public var sizeHandler: ((Item, UICollectionView, UICollectionViewLayout, NSIndexPath) -> CGSize)?
+    open var sizeHandler: ((Item, UICollectionView, UICollectionViewLayout, IndexPath) -> CGSize)?
 
-    public var didSelectHandler: ((Item, UICollectionView, NSIndexPath) -> Void)?
-    public var didDeselectHandler: ((Item, UICollectionView, NSIndexPath) -> Void)?
+    open var didSelectHandler: ((Item, UICollectionView, IndexPath) -> Void)?
+    open var didDeselectHandler: ((Item, UICollectionView, IndexPath) -> Void)?
     
-    public var dequeueCellHandler: ((Item, UICollectionView, NSIndexPath) -> UICollectionViewCell)?
+    open var dequeueCellHandler: ((Item, UICollectionView, IndexPath) -> UICollectionViewCell)?
     
     public convenience init(object: AnyObject?){
         self.init()

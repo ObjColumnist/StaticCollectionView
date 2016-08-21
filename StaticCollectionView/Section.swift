@@ -8,24 +8,22 @@
 
 import UIKit
 
-public class Section: Node {
-    public var items: [Item] = []
+open class Section: Node {
+    open var items: [Item] = []
     
-    public var insets: UIEdgeInsets?
+    open var insets: UIEdgeInsets?
     
-    public var minimumLineSpacing: CGFloat?
-    public var minimumInteritemSpacing: CGFloat?
+    open var minimumLineSpacing: CGFloat?
+    open var minimumInteritemSpacing: CGFloat?
     
-    public var headerReferenceSize: CGSize?
-    public var footerReferenceSize: CGSize?
+    open var headerReferenceSize: CGSize?
+    open var footerReferenceSize: CGSize?
     
-    public var numberOfItems: Int {
-        get {
-           return items.count
-        }
+    open var numberOfItems: Int {
+        return items.count
     }
     
-    public subscript(index: Int) -> Item {
+    open subscript(index: Int) -> Item {
         get {
             return items[index]
         }
@@ -44,32 +42,32 @@ public class Section: Node {
         self.items = objects.map({ Item(object: $0) })
     }
     
-    public func addItem(item: Item) {
+    open func add(_ item: Item) {
         items.append(item)
     }
     
-    public func addObject(object: AnyObject) {
+    open func add(_ object: AnyObject) {
         items.append(Item(object: object))
     }
     
-    public func removeItem(item: Item) {
-        if let index = indexForItem(item) {
-            items.removeAtIndex(index)
+    open func remove(_ item: Item) {
+        if let index = index(for: item) {
+            items.remove(at: index)
         }
     }
     
-    public func removeObject(object: AnyObject) {
-        if let index = indexForObject(object) {
-            items.removeAtIndex(index)
+    open func remove(_ object: AnyObject) {
+        if let index = index(for: object) {
+            items.remove(at: index)
         }
     }
     
-    public func indexForItem(item: Item) -> Int? {
-        return items.indexOf(item)
+    open func index(for item: Item) -> Int? {
+        return items.index(of: item)
     }
     
-    public func indexForObject(object: AnyObject) -> Int? {
-        for (index, _) in items.enumerate() {
+    open func index(for object: AnyObject) -> Int? {
+        for (index, _) in items.enumerated() {
             if let object = object as? NSObject {
                 for item in items{
                     if let itemObject = item.object as? NSObject {
@@ -83,12 +81,12 @@ public class Section: Node {
         return nil
     }
     
-    public func containsItem(item: Item) -> Bool {
+    open func contains(_ item: Item) -> Bool {
         return items.contains(item)
     }
     
-    public func containsObject(object: AnyObject) -> Bool {
-        if let _ = indexForObject(object) {
+    open func contains(_ object: AnyObject) -> Bool {
+        if let _ = index(for: object) {
             return true
         } else {
             return false

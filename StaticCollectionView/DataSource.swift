@@ -8,37 +8,31 @@
 
 import UIKit
 
-public class DataSource {
-    public var sections: [Section] = []
-    public var collectionView: UICollectionView?
+open class DataSource {
+    open var sections: [Section] = []
+    open var collectionView: UICollectionView?
     
-    public var numberOfSections: Int {
-        get {
-            return sections.count
-        }
+    open var numberOfSections: Int {
+        return sections.count
     }
     
-    public var numberOfItems: Int {
-        get {
-            return sections.reduce(0, combine: {$0 + $1.numberOfItems})
-        }
+    open var numberOfItems: Int {
+        return sections.reduce(0, {$0 + $1.numberOfItems})
     }
     
-    public var selectedItems: [Item] {
-        get {
-            var selectedItems: [Item] = []
-            
-            if let selectedIndexPaths = collectionView?.indexPathsForSelectedItems() {
-                for indexPath in selectedIndexPaths{
-                    selectedItems.append(itemAtIndexPath(indexPath))
-                }
+    open var selectedItems: [Item] {
+        var selectedItems: [Item] = []
+        
+        if let selectedIndexPaths = collectionView?.indexPathsForSelectedItems {
+            for indexPath in selectedIndexPaths{
+                selectedItems.append(item(at: indexPath))
             }
-            
-            return selectedItems
         }
+        
+        return selectedItems
     }
     
-    public subscript(index: Int) -> Section {
+    open subscript(index: Int) -> Section {
         get {
             return sections[index]
         }
@@ -47,12 +41,12 @@ public class DataSource {
         }
     }
     
-    public subscript(indexPath: NSIndexPath) -> Item {
+    open subscript(indexPath: IndexPath) -> Item {
         get {
-            return sections[indexPath.section].items[indexPath.item]
+            return sections[(indexPath as NSIndexPath).section].items[(indexPath as NSIndexPath).item]
         }
         set(newValue) {
-            sections[indexPath.section].items[indexPath.item] = newValue
+            sections[(indexPath as NSIndexPath).section].items[(indexPath as NSIndexPath).item] = newValue
         }
     }
     
@@ -60,15 +54,15 @@ public class DataSource {
         
     }
     
-    public func sectionAtIndex(index: Int) -> Section {
+    open func section(at index: Int) -> Section {
         return sections[index]
     }
     
-    public func itemAtIndexPath(indexPath: NSIndexPath) -> Item {
-        return sections[indexPath.section].items[indexPath.row]
+    open func item(at indexPath: IndexPath) -> Item {
+        return sections[(indexPath as NSIndexPath).section].items[(indexPath as NSIndexPath).row]
     }
     
-    public func objectAtIndexPath(indexPath: NSIndexPath) -> AnyObject? {
-        return sections[indexPath.section].items[indexPath.row].object
+    open func object(at indexPath: IndexPath) -> AnyObject? {
+        return sections[(indexPath as NSIndexPath).section].items[(indexPath as NSIndexPath).row].object
     }
 }

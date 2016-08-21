@@ -8,8 +8,8 @@
 
 import UIKit
 
-public class Node: Equatable {
-    public var object: AnyObject?
+open class Node: Equatable {
+    open var object: AnyObject?
     
     public init(){
         

@@ -8,48 +8,48 @@
 
 import UIKit
 
-public class ViewController: UICollectionViewController {
+open class ViewController: UICollectionViewController {
 
-    public let dataSource = DataSource()
+    open let dataSource = DataSource()
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.collectionView = collectionView
         reloadDataSource()
     }
     
-    public func reloadDataSource() {
+    open func reloadDataSource() {
         
     }
 
     // MARK: UICollectionViewDataSource
 
-    public override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    open override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return dataSource.numberOfSections
     }
 
-    public override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    open override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.sections[section].numberOfItems
     }
 
-    public override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let item = dataSource.itemAtIndexPath(indexPath)
+    open override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let item = dataSource.item(at: indexPath)
         
         return item.dequeueCellHandler!(item, collectionView, indexPath)
     }
 
     // MARK: UICollectionViewDelegate
 
-    public override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let item = dataSource.itemAtIndexPath(indexPath)
+    open override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = dataSource.item(at: indexPath)
         
         if let didSelectHandler = item.didSelectHandler {
             return didSelectHandler(item, collectionView, indexPath)
         }
     }
     
-    public override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        let item = dataSource.itemAtIndexPath(indexPath)
+    open override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let item = dataSource.item(at: indexPath)
         
         if let didDeselectHandler = item.didDeselectHandler {
             return didDeselectHandler(item, collectionView, indexPath)
